@@ -1,0 +1,27 @@
+<resources>
+
+    <!--<string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>-->
+    <!--<string name="banner_home_footer">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="interstitial_full_screen">ca-app-pub-3940256099942544/1033173712</string>-->
+    <!--<string name="rewarded_video">ca-app-pub-3940256099942544/5224354917</string>-->
+
+    <string name="admob_app_id">ca-app-pub-5927678055487004~3829908266</string>
+    <string name="banner_home_footer">ca-app-pub-5927678055487004/2567855530</string>
+    <string name="interstitial_full_screen">ca-app-pub-5927678055487004/1773648616</string>
+    <string name="rewarded_video">ca-app-pub-5927678055487004/1773648616</string>
+
+    <string name="app_name">E-Voting</string>
+
+    <string name="title_activity_home">E-Voting</string>
+    <string name="title_activity_cand_list">Candidate List</string>
+
+    <string name="home_button_candidate">Candidate List</string>
+    <string name="home_button_vote">Vote</string>
+    <string name="home_button_result">Result</string>
+    <string name="home_button_info">More Info</string>
+
+    <string name="result_date">Result will be announced on 30-Sep-2018 at 9.00AM</string>
+    <string name="voting_date">Election is on 28-Sep-2018 from 9.00AM to 5.00PM</string>
+
+    <string name="empty_list_message">Data not available</string>
+</resources>

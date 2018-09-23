@@ -1,0 +1,24 @@
+{
+  "Candidate" : [
+    {
+      "Srno":"1",
+      "name":"Swapnali Sonawane",
+      "symbol":"Cricket Bat"
+    },
+    {
+      "Srno":"2",
+      "name":"Ashwini",
+      "symbol":"Fan"
+    },
+    {
+      "Srno":"3",
+      "name":"Darshana",
+      "symbol":"Gas Cylinder"
+    },
+    {
+      "Srno":"4",
+      "name":"Suvidnya",
+      "symbol":"Plane"
+    }
+  ]
+}

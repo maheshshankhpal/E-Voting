@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#58319b</color>
+    <color name="colorAccent">#4d2b88</color>
+
+    <color name="actionBar">#673AB7</color>
+
+    <color name="navMenuBG">#ffffff</color>
+    <color name="menuHeader">#000000</color>
+    <color name="menuChild">#000000</color>
+
+    <color name="row_text_color">#000000</color>
+    <color name="disabled_text_color">#000000</color>
+
+    <color name="RedZone_text_color">#ffffff</color>
+    <color name="RedZone">#FF6666</color>
+    <color name="YellowZone_text_color">#000000</color>
+    <color name="YellowZone">#FFFF66</color>
+    <color name="GreenZone_text_color">#000000</color>
+    <color name="GreenZone">#66FF66</color>
+
+    <color name="buttonClick">#a9bfd1</color>
+    <color name="buttonBackground">#673AB7</color>
+    <color name="buttonText">#ffffff</color>
+
+    <color name="emptyListMessage">#000000</color>
+</resources>
