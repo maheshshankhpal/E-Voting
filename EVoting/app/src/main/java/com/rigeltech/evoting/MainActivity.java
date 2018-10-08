@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.rigeltech.evoting.view.activity.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,6 +94,8 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @OnClick(R.id.vote)
     public void onVoteClicked(){
+//        Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
+  //      startActivity(intent);
         showSnackBar("voting_date",(LinearLayout) findViewById(R.id.root_layout));
     }
 

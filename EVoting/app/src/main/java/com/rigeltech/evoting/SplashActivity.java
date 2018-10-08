@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.rigeltech.evoting.view.activity.LoginActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -21,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run(){
                 try{
                     sleep(3000);
-                    Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }catch (InterruptedException e){

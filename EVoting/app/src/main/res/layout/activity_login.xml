@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    >
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linLayLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/corner_radius_editext"
+                    android:minHeight="25px"
+                    android:minWidth="25px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etLoginUsername"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight=".5"
+                        android:background="@null"
+                        android:hint="@string/hintLoginUsername"
+                        android:imeOptions="actionNext"
+                        android:inputType="textFilter"
+                        android:padding="10dp"
+                        android:textColor="#231f20"
+                        android:textColorHint="#aeb2b2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/corner_radius_editext"
+                    android:minHeight="25px"
+                    android:minWidth="25px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etLoginPassword"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight=".5"
+                        android:background="@null"
+                        android:hint="@string/hintLoginPassword"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:textColor="#231f20"
+                        android:textColorHint="#aeb2b2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="25px"
+                    android:minWidth="25px"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/buttonLoginText"
+                        android:textStyle="bold"
+                        android:theme="@style/ButtonTheme" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+</FrameLayout>

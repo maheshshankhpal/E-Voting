@@ -24,4 +24,16 @@
     <string name="voting_date">Election is on 28-Sep-2018 from 9.00AM to 5.00PM</string>
 
     <string name="empty_list_message">Data not available</string>
+
+    <string name="invalid_login">Invalid Credentials</string>
+    <string name="user_name">userName</string>
+    <string name="timeKey">timeKey</string>
+    <string name="profile_name">profileName</string>
+    <string name="profile_role">profileRole</string>
+    <string name="Mandatory">This is mandatory Field</string>
+    <string name="NoInternet">Please check the internet connection and try again…!</string>
+
+    <string name="hintLoginUsername">User name</string>
+    <string name="hintLoginPassword">Password</string>
+    <string name="buttonLoginText">Sign In</string>
 </resources>
