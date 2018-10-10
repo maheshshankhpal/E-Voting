@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.rigeltech.evoting.IBaseAppCompant;
+import com.rigeltech.evoting.Interface.IBaseAppCompant;
 import com.rigeltech.evoting.R;
 
 

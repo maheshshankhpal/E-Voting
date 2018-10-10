@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.rigeltech.evoting.utility.SessionManager;
 import com.rigeltech.evoting.view.activity.LoginActivity;
 
 import butterknife.BindView;
@@ -89,14 +90,24 @@ public class MainActivity extends BaseAppCompatActivity {
         showSnackBar("Clicked",(LinearLayout) findViewById(R.id.root_layout));
 
         Intent intent=new Intent(getApplicationContext(), CandidateListActivity.class);
+        intent.putExtra("call_from","candidate");
         startActivity(intent);
     }
 
     @OnClick(R.id.vote)
     public void onVoteClicked(){
-//        Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
-  //      startActivity(intent);
-        showSnackBar("voting_date",(LinearLayout) findViewById(R.id.root_layout));
+
+        if(SessionManager.getString(getApplicationContext(), getString(R.string.vote)).equals("0")) {
+
+            Intent intent = new Intent(getApplicationContext(), CandidateListActivity.class);
+            intent.putExtra("call_from", "vote");
+            startActivity(intent);
+        }
+        else{
+            showSnackBar("Hey "+SessionManager.getString(getApplicationContext(),getString(R.string.profile_name))
+                    +", Your vote has already been done. Thank You...",(LinearLayout) findViewById(R.id.root_layout));
+        }
+       // showSnackBar("voting_date",(LinearLayout) findViewById(R.id.root_layout));
     }
 
     @OnClick(R.id.result)

@@ -1,6 +1,8 @@
 package com.rigeltech.evoting;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.rigeltech.evoting.utility.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +37,8 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
 
     private AdView mAdView;
 
+    String call_from="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +49,12 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
         ButterKnife.bind(this);
         setTitle(R.string.title_activity_cand_list);
 
+        call_from = getIntent().getStringExtra("call_from");
+
         loadList();
 
         loadAdView();
     }
-
-
 
     void loadAdView()
     {
@@ -154,6 +159,32 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
 
     @Override
     public void onItemClick(CandidateModel item) {
+        if(call_from.equals("vote")){
+            showSnackBar("Vote",(LinearLayout) findViewById(R.id.root_layout));
+            voteDialog(item);
+        }
+        else
         showSnackBar(item.getName(),(LinearLayout) findViewById(R.id.root_layout));
+    }
+
+    private void voteDialog(CandidateModel candidateModel){
+        new AlertDialog.Builder(this)
+                .setTitle("Vote Confirmation")
+                .setMessage("Do you want to Vote to "+candidateModel.getName()+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SessionManager.putString(getApplicationContext(), getString(R.string.vote),"1");
+                        showSnackBar("Vote Submitted Successfully",(LinearLayout) findViewById(R.id.root_layout));
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
     }
 }

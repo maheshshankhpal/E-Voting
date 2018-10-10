@@ -19,7 +19,7 @@ import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.rigeltech.evoting.IBaseAppCompant;
+import com.rigeltech.evoting.Interface.IBaseAppCompant;
 
 
 /**

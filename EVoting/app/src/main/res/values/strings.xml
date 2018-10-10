@@ -30,6 +30,7 @@
     <string name="timeKey">timeKey</string>
     <string name="profile_name">profileName</string>
     <string name="profile_role">profileRole</string>
+    <string name="vote">vote</string>
     <string name="Mandatory">This is mandatory Field</string>
     <string name="NoInternet">Please check the internet connection and try again…!</string>
 

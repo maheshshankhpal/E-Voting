@@ -20,6 +20,15 @@ public class UserDetail {
     @Expose
     private String TimeKey;
 
+
+    public String getVote() {
+        return vote;
+    }
+
+    @SerializedName("vote")
+    @Expose
+    private String vote;
+
     public String getTimeKey() {
         return TimeKey;
     }

@@ -1,7 +1,7 @@
 package com.rigeltech.evoting.contract;
 
 
-import com.rigeltech.evoting.IBaseAppCompant;
+import com.rigeltech.evoting.Interface.IBaseAppCompant;
 import com.rigeltech.evoting.model.login.LoginRequest;
 import com.rigeltech.evoting.model.login.LoginResponse;
 import com.rigeltech.evoting.model.login.UserDetail;

@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.rigeltech.evoting.Interface.IBaseAppCompant;
+
 
 /**
  * Created by Mahesh on 2017-10-25.

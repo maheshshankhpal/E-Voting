@@ -97,7 +97,7 @@ public class LoginActivity extends BaseAppCompatActivity implements ILoginContra
         SessionManager.putString(getApplicationContext(), getString(R.string.user_name), etUsername.getText().toString());
         SessionManager.putString(getApplicationContext(), getString(R.string.profile_name), userDetail.getProfileOwner());
         SessionManager.putString(getApplicationContext(), getString(R.string.profile_role), userDetail.getUserrole());
-
+        SessionManager.putString(getApplicationContext(), getString(R.string.vote), userDetail.getVote());
 
 
        Intent intent = new Intent(LoginActivity.this, MainActivity.class);

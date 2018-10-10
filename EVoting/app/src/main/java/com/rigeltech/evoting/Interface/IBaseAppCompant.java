@@ -1,4 +1,4 @@
-package com.rigeltech.evoting;
+package com.rigeltech.evoting.Interface;
 
 public interface IBaseAppCompant {
     void showProgressDialog();
