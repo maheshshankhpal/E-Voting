@@ -49,5 +49,12 @@
             android:id="@+id/candidate_symbol"
             android:text="ABC DEF"
             android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/vote_count"
+            android:text="ABC DEF"
+            android:textSize="20dp"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

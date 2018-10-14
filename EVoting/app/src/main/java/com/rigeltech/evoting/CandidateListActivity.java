@@ -41,6 +41,8 @@ public class CandidateListActivity extends BaseAppCompatActivity implements
 
     IVotingContract.IVotingPresenter votingPresenter;
 
+    public  static boolean isResult =false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +102,7 @@ public class CandidateListActivity extends BaseAppCompatActivity implements
     }
 
     void loadList(List<VotingResultModel> votingResultResponseModelList){
-        showProgressDialog();
+      //  showProgressDialog();
 
         try {
             showRecyclerView();
@@ -109,7 +111,7 @@ public class CandidateListActivity extends BaseAppCompatActivity implements
         } catch (Exception e){
         }
 
-        hideProgressDialog();
+
     }
 
     public void showRecyclerView() {
@@ -161,7 +163,7 @@ public class CandidateListActivity extends BaseAppCompatActivity implements
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        showProgressDialog();
                         SubmitVoteRequestModel submitVoteRequestModel = new SubmitVoteRequestModel();
 
                         submitVoteRequestModel.setUsername(SessionManager.getString(getApplicationContext(),getString(R.string.user_name)));
@@ -180,24 +182,31 @@ public class CandidateListActivity extends BaseAppCompatActivity implements
     }
 
     void getVotingResult(){
-        hideProgressDialog();
+        showProgressDialog();
         votingPresenter.GetVotingResult();
     }
 
     @Override
     public void onSubmitVoteSuccess(List<Result> result) {
+        hideProgressDialog();
         SessionManager.putString(getApplicationContext(), getString(R.string.vote),"1");
         showSnackBar("Vote Submitted Successfully",(LinearLayout) findViewById(R.id.root_layout));
         finish();
+
+
     }
 
     @Override
     public void onGetVotingResult(List<VotingResultModel> votingResultResponseModel) {
+
+        isResult = call_from.equals("result");
         loadList(votingResultResponseModel);
+
+        hideProgressDialog();
     }
 
     @Override
     public void onFailure(String message) {
-
+        hideProgressDialog();
     }
 }

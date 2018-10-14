@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -22,6 +23,9 @@ import butterknife.OnClick;
 public class MainActivity extends BaseAppCompatActivity {
 
     private AdView mAdView;
+
+    @BindView(R.id.username)
+    TextView username;
 
     @BindView(R.id.candidate_list)
     CardView candidate_list;
@@ -41,6 +45,8 @@ public class MainActivity extends BaseAppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        username.setText("User : "+SessionManager.getString(getApplicationContext(), getString(R.string.profile_name)));
        // setSupportActionBar();
         loadAdView();
 
@@ -112,7 +118,9 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @OnClick(R.id.result)
     public void onResultClicked(){
-        showSnackBar("result_date",(LinearLayout) findViewById(R.id.root_layout));
+        Intent intent = new Intent(getApplicationContext(), CandidateListActivity.class);
+        intent.putExtra("call_from", "result");
+        startActivity(intent);
     }
 
     @OnClick(R.id.more_info)

@@ -1,6 +1,7 @@
 package com.rigeltech.evoting;
 
 import android.content.Context;
+import android.opengl.Visibility;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,6 +57,13 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
         holder.candidate_name.setText(candidateModelList.get(position).getCandId() + ". " + candidateModelList.get(position).getName());
         holder.candidate_symbol.setText("Symbol - " + candidateModelList.get(position).getSymbol());
 
+        if(CandidateListActivity.isResult) {
+            holder.vote_count.setText("Total Vote - " + candidateModelList.get(position).getVote());
+        }
+        else{
+            holder.vote_count.setVisibility(View.GONE);
+        }
+
         String symbol_drawable = candidateModelList.get(position).getSymbol().replace(" ", "_").toLowerCase();
 
 
@@ -77,7 +85,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_symbol;
-        TextView candidate_name, candidate_symbol;
+        TextView candidate_name, candidate_symbol,vote_count;
         CardView cardViewCandidate;
 
         public ViewHolder(View view) {
@@ -86,7 +94,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
             candidate_name = (TextView) view.findViewById(R.id.candidate_name);
             candidate_symbol = (TextView) view.findViewById(R.id.candidate_symbol);
             cardViewCandidate = (CardView) view.findViewById(R.id.cardViewCandidate);
-
+            vote_count = (TextView) view.findViewById(R.id.vote_count);
             context = view.getContext();
         }
 
