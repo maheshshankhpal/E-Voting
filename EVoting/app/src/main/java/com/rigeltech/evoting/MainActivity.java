@@ -1,10 +1,14 @@
 package com.rigeltech.evoting;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -131,5 +135,37 @@ public class MainActivity extends BaseAppCompatActivity {
 
     private void onLoad() {
         showProgressDialog();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+           return exit();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public boolean exit() {
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        alertbox.setTitle("Do You Want To Exit ?");
+        alertbox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                moveTaskToBack(true);
+                finish();
+            }
+        });
+
+        alertbox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                // Nothing will be happened when clicked on no button
+                // of Dialog
+            }
+        });
+
+        alertbox.show();
+
+        return true;
     }
 }
