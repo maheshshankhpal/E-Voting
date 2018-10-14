@@ -13,7 +13,8 @@ import com.rigeltech.evoting.utility.Utility;
  * Created by Mahesh on 2017-10-25.
  */
 
-public class LoginPresenter implements ILoginContract.ILoginPresenter,ILoginContract.ILoginInteractor.onLoginFinishedListener {
+public class LoginPresenter implements ILoginContract.ILoginPresenter,
+        ILoginContract.ILoginInteractor.onLoginFinishedListener {
 
 
     private ILoginContract.ILoginInteractor loginInteractor;

@@ -1,36 +1,36 @@
+
+
 package com.rigeltech.evoting;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.rigeltech.evoting.contract.IVotingContract;
+import com.rigeltech.evoting.model.Result;
+import com.rigeltech.evoting.model.voting.SubmitVoteRequestModel;
+import com.rigeltech.evoting.model.voting.VotingResultModel;
+import com.rigeltech.evoting.presenter.VotingPresenter;
 import com.rigeltech.evoting.utility.SessionManager;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CandidateListActivity extends BaseAppCompatActivity implements CandidateListAdapter.OnClickListener{
+public class CandidateListActivity extends BaseAppCompatActivity implements
+        IVotingContract.IVotingView,
+        CandidateListAdapter.OnClickListener{
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -38,6 +38,8 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
     private AdView mAdView;
 
     String call_from="";
+
+    IVotingContract.IVotingPresenter votingPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,9 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
 
         call_from = getIntent().getStringExtra("call_from");
 
-        loadList();
+        votingPresenter = new VotingPresenter(this);
+
+        getVotingResult();
 
         loadAdView();
     }
@@ -95,34 +99,17 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
         });
     }
 
-    void loadList(){
+    void loadList(List<VotingResultModel> votingResultResponseModelList){
         showProgressDialog();
-        List<CandidateModel> candidateModelList= new ArrayList<>();
+
         try {
-            JSONObject obj = new JSONObject(loadJSONFromAsset(getAssets().open("candidate_list.json")));
-            JSONArray jsonArray = obj.getJSONArray("Candidate");
-
-            for (int headerIndex = 0; headerIndex < jsonArray.length(); headerIndex++) {
-                CandidateModel candidateModel=new CandidateModel();
-                JSONObject jsonCandidate = jsonArray.getJSONObject(headerIndex);
-                candidateModel.setName(jsonCandidate.getString("name"));
-                candidateModel.setSymbol(jsonCandidate.getString("symbol"));
-                candidateModel.setSrno(jsonCandidate.getString("Srno"));
-
-                candidateModelList.add(candidateModel);
-            }
-
             showRecyclerView();
-            CandidateListAdapter candidateListAdapter= new CandidateListAdapter(candidateModelList,this);
+            CandidateListAdapter candidateListAdapter= new CandidateListAdapter(votingResultResponseModelList,this);
             recyclerView.setAdapter(candidateListAdapter);
-
-            hideProgressDialog();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (Exception e){
         }
+
+        hideProgressDialog();
     }
 
     public void showRecyclerView() {
@@ -158,7 +145,7 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
     }
 
     @Override
-    public void onItemClick(CandidateModel item) {
+    public void onItemClick(VotingResultModel item) {
         if(call_from.equals("vote")){
             showSnackBar("Vote",(LinearLayout) findViewById(R.id.root_layout));
             voteDialog(item);
@@ -167,16 +154,20 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
         showSnackBar(item.getName(),(LinearLayout) findViewById(R.id.root_layout));
     }
 
-    private void voteDialog(CandidateModel candidateModel){
+    private void voteDialog(final VotingResultModel candidateModel){
         new AlertDialog.Builder(this)
                 .setTitle("Vote Confirmation")
                 .setMessage("Do you want to Vote to "+candidateModel.getName()+"?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SessionManager.putString(getApplicationContext(), getString(R.string.vote),"1");
-                        showSnackBar("Vote Submitted Successfully",(LinearLayout) findViewById(R.id.root_layout));
-                        finish();
+
+                        SubmitVoteRequestModel submitVoteRequestModel = new SubmitVoteRequestModel();
+
+                        submitVoteRequestModel.setUsername(SessionManager.getString(getApplicationContext(),getString(R.string.user_name)));
+                        submitVoteRequestModel.setCand_id(candidateModel.getCandId());
+
+                        votingPresenter.submitVote(submitVoteRequestModel);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -186,5 +177,27 @@ public class CandidateListActivity extends BaseAppCompatActivity implements Cand
                     }
                 })
                 .show();
+    }
+
+    void getVotingResult(){
+        hideProgressDialog();
+        votingPresenter.GetVotingResult();
+    }
+
+    @Override
+    public void onSubmitVoteSuccess(List<Result> result) {
+        SessionManager.putString(getApplicationContext(), getString(R.string.vote),"1");
+        showSnackBar("Vote Submitted Successfully",(LinearLayout) findViewById(R.id.root_layout));
+        finish();
+    }
+
+    @Override
+    public void onGetVotingResult(List<VotingResultModel> votingResultResponseModel) {
+        loadList(votingResultResponseModel);
+    }
+
+    @Override
+    public void onFailure(String message) {
+
     }
 }

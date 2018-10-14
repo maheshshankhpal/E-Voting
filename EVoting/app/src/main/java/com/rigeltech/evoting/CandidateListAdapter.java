@@ -1,17 +1,15 @@
 package com.rigeltech.evoting;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.rigeltech.evoting.model.voting.VotingResultModel;
 
 import java.util.List;
 
@@ -22,12 +20,12 @@ import java.util.List;
 public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdapter.ViewHolder> {
 
     private final OnClickListener listener;
-    public List<CandidateModel> candidateModelList;
+    public List<VotingResultModel> candidateModelList;
 
 
     Context context;
 
-    public CandidateListAdapter(List<CandidateModel> candidateModelList, OnClickListener listener) {
+    public CandidateListAdapter(List<VotingResultModel> candidateModelList, OnClickListener listener) {
         this.candidateModelList = candidateModelList;
         this.listener = listener;
 
@@ -43,7 +41,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
     }
 
     public interface OnClickListener {
-        void onItemClick(CandidateModel item);
+        void onItemClick(VotingResultModel item);
     }
 
     @Override
@@ -55,7 +53,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.candidate_name.setText(candidateModelList.get(position).getSrno() + ". " + candidateModelList.get(position).getName());
+        holder.candidate_name.setText(candidateModelList.get(position).getCandId() + ". " + candidateModelList.get(position).getName());
         holder.candidate_symbol.setText("Symbol - " + candidateModelList.get(position).getSymbol());
 
         String symbol_drawable = candidateModelList.get(position).getSymbol().replace(" ", "_").toLowerCase();
@@ -72,7 +70,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
     }
 
 
-    public CandidateModel getItem(int position) {
+    public VotingResultModel getItem(int position) {
         return candidateModelList.get(position);
     }
 
@@ -93,7 +91,7 @@ public class CandidateListAdapter extends RecyclerView.Adapter<CandidateListAdap
         }
 
         //added new method
-        public void bind(final CandidateModel item, final OnClickListener listener) {
+        public void bind(final VotingResultModel item, final OnClickListener listener) {
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
